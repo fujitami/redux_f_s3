@@ -74,6 +74,23 @@ export default function appReducer(state = initialState, action) {
         })
       }
     }
+    case 'filters/statusFilterChanged': {
+      return {
+        // Copy the whole state
+        // state全体をコピーする
+        ...state,
+        // Overwrite the filters value
+        // フィルタの値を上書きする
+        filters: {
+          // copy the other filter fields
+          // 他のフィルタフィールドをコピーする
+          ...state.filters,
+          // And replace the status field with the new value
+          // そして、ステータスフィールドを新しい値に置き換える
+          status: action.payload
+        }
+      }
+    }
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this speciic action, return the existing state unchanged
