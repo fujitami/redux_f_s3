@@ -49,6 +49,31 @@ export default function appReducer(state = initialState, action) {
         ]
       }
     }
+    case 'todos/todoToggled': {
+      return {
+        // Again copy the entire state object
+        // もう一度stateオブジェクトの全体をコピーする
+        ...state,
+        // This time, we need to make a copy of the old todos array
+        // 今回は古いtodosの配列のコピーを作る必要がある
+        todos: state.todos.map(todo => {
+          // If this isn't the todo item we're looking for, leave it alone
+          // もしこれが探しているtodoのアイテムではなかったら、そのままにしておく
+          if (todo.id !== action.payload) {
+            return todo
+          }
+
+          // We've found the todo that has to change. Return a copy:
+          // 変更する必要のあるtodoが見つかったら、コピーを返す
+          return {
+            ...todo,
+            // Flip the completes flag
+            // 完了フラグを裏返す(完了状態にする)
+            completed: !todo.completed
+          }
+        })
+      }
+    }
     default:
       // If this reducer doesn't recognize the action type, or doesn't
       // care about this speciic action, return the existing state unchanged
