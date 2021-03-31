@@ -23,6 +23,8 @@ const unsubscribe = store.subscribe(() =>
 // Now, dispatch some actions
 // ここでいくつかのアクションを更新する
 
+console.log('Dispatching action')
+
 store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about actions' })
 store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about reducers' })
 store.dispatch({ type: 'todos/todoAdded', payload: 'Learn about stores' })
@@ -45,6 +47,8 @@ unsubscribe()
 // もう一つのactionをディスパッチして、何が起こるかを確認する
 
 store.dispatch({ type: 'todos/todoAdded', payload: 'Try creating a store' })
+
+console.log('Dispatch complete')
 
 ReactDOM.render(
   <React.StrictMode>
