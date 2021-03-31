@@ -1,12 +1,20 @@
 import { createStore } from 'redux'
 import rootReducer from './reducer'
-import {
-  sayHiOnDispatch,
-  includeMeaningOfLife
-} from './exampleAddons/enhancers'
+// import {
+//   sayHiOnDispatch,
+//   includeMeaningOfLife
+// } from './exampleAddons/enhancers'
 
-const composedEnhancer = compose(sayHiOnDispatch, includeMeaningOfLife)
+import { print1, print2, print3 } from './exampleAddons/middleware'
 
-const store = createStore(rootReducer, undefined, composedEnhancer)
+// const composedEnhancer = compose(sayHiOnDispatch, includeMeaningOfLife)
+
+const middlewareEnhancer = applyMiddleware(print1, print2, print3)
+
+// const store = createStore(rootReducer, undefined, composedEnhancer)
+
+// Pass enhancer as the second arg, since there's no preloadedState
+// preloadedStateがないため、2番目の引数としてenhancerを渡す
+const store = createStore(rootReducer, middlewareEnhancer)
 
 export default store
