@@ -48,6 +48,7 @@ unsubscribe()
 
 store.dispatch({ type: 'todos/todoAdded', payload: 'Try creating a store' })
 
+console.log('State after dispatch: ', store.getState())
 console.log('Dispatch complete')
 
 ReactDOM.render(
